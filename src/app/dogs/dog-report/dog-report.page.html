@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>dog-report</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-item>
+    <ion-label position="floating">Titulo</ion-label>
+    <ion-input [(ngModel)]="dogInform.title" placeholder="Digite o titulo do post"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">descrição</ion-label>
+    <ion-input [(ngModel)]="dogInform.description" placeholder="Descrição breve sobre" row="5"></ion-input>
+  </ion-item>
+
+  <app-camera></app-camera>
+  <app-location></app-location>
+  <ion-button class="save-button" (click)="save()">
+    Salvar
+  </ion-button>
+</ion-content>

@@ -1,0 +1,28 @@
+.butonFound{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 16px;
+    border-radius: 12px;
+
+    background: var(--ion-color-primary);
+    color: white;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    min-height: 36px;
+    cursor: pointer;
+
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+
+    bottom: 20px;
+    position:fixed;
+    width: 100%;
+}
+
+.ListDogs{
+    max-height: 90%;
+    overflow-y: auto;
+}

@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>dogs</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list class="ListDogs">
+    @for (dog of dogs; track $index) {
+        <ion-item [routerLink]="['/dogs', dog.id]" button>
+
+          <ion-avatar slot="start">
+            <ion-img [src]="dog.imageUrl"></ion-img>
+          </ion-avatar>
+
+          <ion-label>{{dog.title}}</ion-label>
+        </ion-item>
+    }
+  </ion-list>
+
+  <ion-label class="butonFound" [routerLink]="['/dogs', 'report']" button>Encontrei um dog</ion-label>
+
+</ion-content>
