@@ -13,6 +13,7 @@ export class AppComponent {
 
   constructor(private platform: Platform) {
     this.initializeApp();
+
   }
 
   async initializeApp() {

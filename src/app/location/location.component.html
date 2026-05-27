@@ -1,35 +1,19 @@
 <ion-card>
 
-  <ion-card-content>
-
-      <ion-button
-      expand="block"
-      (click)="findLocalization()">
-
-      Pegar localização
-
-    </ion-button>
-
-    @if(getLoading()){
-      <p>loading...</p>
-    }
-
     @if(getLatitude() && getLongitude()){
-
       <ion-card>
         <ion-card-content>
-
-          <strong>Latitude:</strong>
-          {{ getLatitude() }}
-
-          <br>
-
-          <strong>Longitude:</strong>
-          {{ getLongitude() }}
-
+          <div id="map"></div>
         </ion-card-content>
       </ion-card>
-
     }
+
+    <!-- @if(getLoading()){
+      <p>loading...</p>
+    } -->
+
+  <ion-card-content>
+    <ion-button expand="block" (click)="findLocalization()">Pegar localização</ion-button>
+
   </ion-card-content>
 </ion-card>
