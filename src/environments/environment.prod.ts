@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+  databaseName: 'dogfinderDB',
+  databaseVersion: 1,
+  tableNameDogs: 'cardInfo'
 };

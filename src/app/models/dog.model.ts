@@ -1,10 +1,10 @@
 export interface Dog {
     id: string;
     title: string;
-    description?: string;
+    description: string;
     location: {
         latitude: number;
         longitude: number;
     }
-    imageUrl: string;
+    image: string;
 }

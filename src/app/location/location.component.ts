@@ -60,6 +60,10 @@ export class LocationComponent {
     });
   }
 
+  needsToFindLocation() {
+    return this.latitude() === null || this.longitude() === null;
+  }
+
   async findLocalization() {
 
     try {
@@ -71,7 +75,7 @@ export class LocationComponent {
       this.latitude.set(position.coords.latitude);
       this.longitude.set(position.coords.longitude);
 
-      await this.loadMap();
+      await this.loadMap()
 
 
     } catch (error) {
@@ -93,6 +97,14 @@ export class LocationComponent {
 
   getLoading(): boolean{
     return this.loading()
+  }
+
+  setLatitude(latitude: number) {
+    this.latitude.set(latitude);
+  }
+
+  setLongitude(longitude: number) {
+    this.longitude.set(longitude);
   }
 
 }

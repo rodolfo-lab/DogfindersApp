@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonAvatar, IonImg, IonLabel, IonList } from '@ionic/angular/standalone';
-import { Dog } from './dog.model';
-import { Dogs } from './dog';
+import { Dog } from '../models/dog.model';
+import { Dogs } from '../services/dog.services';
 import { RouterLink, RouterLinkActive } from "@angular/router";
 
 @Component({
@@ -18,8 +18,8 @@ export class DogsPage implements OnInit {
 
   constructor(private dogsService: Dogs) { }
 
-  ngOnInit() {
-    this.dogs = this.dogsService.getAllRecipes()
+  async ngOnInit() {
+    this.dogs = await this.dogsService.getAllDogs()
   }
 
 }

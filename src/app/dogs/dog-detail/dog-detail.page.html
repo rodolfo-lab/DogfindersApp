@@ -8,7 +8,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-img [src]="loadedDog.imageUrl"></ion-img>
+        <ion-img [src]="loadedDog.image"></ion-img>
       </ion-col>
     </ion-row>
 
@@ -19,13 +19,7 @@
             {{loadedDog.description}}
           </ion-item>
 
-          <ion-item>
-            Latitude: {{loadedDog.location.latitude}}
-          </ion-item>
-
-          <ion-item>
-            Longitude: {{loadedDog.location.longitude}}
-          </ion-item>
+          <app-location></app-location>
         </ion-list>
       </ion-col>
     </ion-row>

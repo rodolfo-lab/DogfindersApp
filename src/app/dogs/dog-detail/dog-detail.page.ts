@@ -1,38 +1,72 @@
-import { Dogs } from './../dog';
-import { Component, OnInit } from '@angular/core';
+import { Dogs } from '../../services/dog.services';
+import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonImg, IonList, IonItem, IonCol, IonRow, IonGrid } from '@ionic/angular/standalone';
 import { ActivatedRoute } from '@angular/router';
-import { Dog } from '../dog.model';
+import { Dog } from '../../models/dog.model';
+import { LocationComponent } from 'src/app/location/location.component';
 
 @Component({
   selector: 'app-dog-detail',
   templateUrl: './dog-detail.page.html',
   styleUrls: ['./dog-detail.page.scss'],
   standalone: true,
-  imports: [IonGrid, IonRow, IonCol, IonList, IonImg, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem]
+  imports: [IonGrid, IonRow, IonCol, IonList, IonImg, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, LocationComponent]
 })
-export class DogDetailPage implements OnInit {
 
-  loadedDog!: Dog
+export class DogDetailPage implements OnInit, AfterViewInit {
 
-  constructor(private activatedRoute: ActivatedRoute,
-              private dogServices: Dogs
+  loadedDog!: Dog;
+
+  @ViewChild(LocationComponent)
+  location!: LocationComponent;
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private dogServices: Dogs
   ) { }
 
   ngOnInit() {
+
     this.activatedRoute.paramMap.subscribe(paramMap => {
-      if(!paramMap.has('dogId')){
-        return
+
+      const dogId = paramMap.get('dogId');
+
+      if (!dogId) {
+        return;
       }
 
-      const dogId = paramMap.get('dogId')
+      const dog = this.dogServices.getDog(dogId);
 
-      if (dogId) {
-        this.loadedDog = this.dogServices.getRecipe(dogId) as Dog
+      if (!dog) {
+        return;
       }
-    })
+
+      this.loadedDog = dog;
+      console.log(this.loadedDog);
+    });
+  }
+  ngAfterViewInit(): void {
+    this.updateMap();
+
   }
 
+  private updateMap() {
+
+    if (!this.loadedDog || !this.location) {
+      return;
+    }
+
+    if (this.loadedDog.location) {
+
+      this.location.setLatitude(
+        this.loadedDog.location.latitude
+      );
+
+      this.location.setLongitude(
+        this.loadedDog.location.longitude
+      );
+    }
+  }
 }

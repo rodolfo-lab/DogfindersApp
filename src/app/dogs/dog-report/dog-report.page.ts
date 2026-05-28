@@ -1,10 +1,11 @@
-import { Dog } from './../dog.model';
+import { Dog } from '../../models/dog.model';
 import { Component, ViewChild, effect, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonInput, IonItem, IonButton } from '@ionic/angular/standalone';
 import { CameraComponent } from 'src/app/camera/camera.component';
 import { LocationComponent } from 'src/app/location/location.component';
+import { Dogs } from 'src/app/services/dog.services';
 
 @Component({
   selector: 'app-dog-report',
@@ -23,7 +24,7 @@ export class DogReportPage {
                           latitude: 0,
                           longitude: 0,
                       },
-                      imageUrl: ''
+                      image: ''
                     }
 
   @ViewChild(CameraComponent)
@@ -32,17 +33,24 @@ export class DogReportPage {
   @ViewChild(LocationComponent)
   location!: LocationComponent;
 
-  constructor(){
+  constructor(private dogs: Dogs){
 
     effect(() => {
-
-      this.dogInform.imageUrl = this.camera?.image();
-      this.dogInform.location.latitude = this.location?.getLatitude();
-      this.dogInform.location.longitude = this.location?.getLongitude();
-
+      this.getLocationAndImage()
     });
   }
 
-  save(){}
+  getLocationAndImage(){
+      this.dogInform.image = this.camera?.image();
+      this.dogInform.location.latitude = this.location?.getLatitude();
+      this.dogInform.location.longitude = this.location?.getLongitude();
+  }
+
+  save(){
+    this.getLocationAndImage()
+    console.log(this.dogInform);
+
+    this.dogs.newDog(this.dogInform)
+  }
 
 }
