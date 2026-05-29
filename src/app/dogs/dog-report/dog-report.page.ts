@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonLabel, IonInput, IonItem, IonButton } from '@ionic/angular/standalone';
 import { CameraComponent } from 'src/app/camera/camera.component';
 import { LocationComponent } from 'src/app/location/location.component';
-import { Dogs } from 'src/app/services/dog.services';
+import { DogService } from 'src/app/services/dog.service';
 
 @Component({
   selector: 'app-dog-report',
@@ -17,15 +17,15 @@ import { Dogs } from 'src/app/services/dog.services';
 export class DogReportPage {
 
   dogInform: Dog = {
-                      id: '',
-                      title: '',
-                      description: '',
-                      location: {
-                          latitude: 0,
-                          longitude: 0,
-                      },
-                      image: ''
-                    }
+    id: 0,
+    title: '',
+    description: '',
+    location: {
+      latitude: 0,
+      longitude: 0,
+    },
+    image: ''
+  }
 
   @ViewChild(CameraComponent)
   camera!: CameraComponent;
@@ -33,10 +33,10 @@ export class DogReportPage {
   @ViewChild(LocationComponent)
   location!: LocationComponent;
 
-  constructor(private dogs: Dogs){
+  constructor(private dogs: DogService){
 
     effect(() => {
-      this.getLocationAndImage()
+      this.getLocationAndImage();
     });
   }
 
@@ -46,11 +46,12 @@ export class DogReportPage {
       this.dogInform.location.longitude = this.location?.getLongitude();
   }
 
-  save(){
-    this.getLocationAndImage()
+  async save() {
+    this.getLocationAndImage();
     console.log(this.dogInform);
 
-    this.dogs.newDog(this.dogInform)
+    const newId = await this.dogs.newDog(this.dogInform);
+    console.log('Dog criado com id:', newId);
   }
 
 }

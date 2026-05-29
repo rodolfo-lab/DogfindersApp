@@ -1,4 +1,4 @@
-import { Dogs } from '../../services/dog.services';
+import { DogService } from '../../services/dog.service';
 import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -24,12 +24,12 @@ export class DogDetailPage implements OnInit, AfterViewInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private dogServices: Dogs
+    private dogService: DogService
   ) { }
 
   ngOnInit() {
 
-    this.activatedRoute.paramMap.subscribe(paramMap => {
+    this.activatedRoute.paramMap.subscribe(async paramMap => {
 
       const dogId = paramMap.get('dogId');
 
@@ -37,7 +37,7 @@ export class DogDetailPage implements OnInit, AfterViewInit {
         return;
       }
 
-      const dog = this.dogServices.getDog(dogId);
+      const dog = await this.dogService.getDog(Number(dogId));
 
       if (!dog) {
         return;

@@ -1,4 +1,4 @@
-<ion-card>
+<ion-card class="location-card">
 
     @if(getLatitude() && getLongitude()){
       <ion-card>
@@ -8,9 +8,17 @@
       </ion-card>
     }
 
-    <!-- @if(getLoading()){
-      <p>loading...</p>
-    } -->
+    @if(getLoading()){
+      <ion-card-content>
+        <p>Obtendo localização...</p>
+      </ion-card-content>
+    }
+
+    @if(getError()){
+      <ion-card-content>
+        <p>{{ getError() }}</p>
+      </ion-card-content>
+    }
 
   @if (needsToFindLocation()) {
     <ion-card-content>

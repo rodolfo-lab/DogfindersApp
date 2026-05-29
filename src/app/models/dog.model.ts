@@ -1,5 +1,5 @@
 export interface Dog {
-    id: string;
+    id: number;
     title: string;
     description: string;
     location: {
@@ -7,4 +7,5 @@ export interface Dog {
         longitude: number;
     }
     image: string;
+    timestamp?: string;
 }

@@ -32,10 +32,6 @@ export class DatabaseService {
     );
   }
 
-  // ==========================
-  // INIT DATABASE
-  // ==========================
-
   async initializeDatabase(): Promise<boolean> {
 
     try {
@@ -48,7 +44,6 @@ export class DatabaseService {
         platform
       );
 
-      // evita erro do jeep-sqlite no browser
       if (platform === 'web') {
 
         console.warn(
@@ -110,10 +105,6 @@ export class DatabaseService {
     }
   }
 
-  // ==========================
-  // TABLES
-  // ==========================
-
   private async createTables() {
 
     this.checkDatabase();
@@ -139,10 +130,6 @@ export class DatabaseService {
       );
     `);
   }
-
-  // ==========================
-  // USERS
-  // ==========================
 
   async addUser(
     usuario: string,
@@ -173,10 +160,6 @@ export class DatabaseService {
       ?? 0
     );
   }
-
-  // ==========================
-  // DOGS
-  // ==========================
 
   async addMissingDog(
     description: string,
@@ -311,10 +294,6 @@ export class DatabaseService {
       ?? 0
     ) > 0;
   }
-
-  // ==========================
-  // CONNECTION CONTROL
-  // ==========================
 
   async closeDatabase():
     Promise<void> {
